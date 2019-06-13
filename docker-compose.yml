@@ -16,6 +16,6 @@ services:
       - "/sys/fs/cgroup/:/host/sys/fs/cgroup:ro"
     environment:
       - DD_API_KEY
-      - DD_APM_ENABLED: 'true'
-      - DD_LOGS_ENABLED: 'true'
-      - DD_PROCESS_AGENT_ENABLED: 'true'
+      - DD_APM_ENABLED='true'
+      - DD_LOGS_ENABLED='true'
+      - DD_PROCESS_AGENT_ENABLED='true'
