@@ -14,6 +14,7 @@ If you're using Docker CE, you will also need to install [Docker Compose](https:
 1. Set your datadog API key to the environment variable "DD_API_KEY"
 
  export DD_API_KEY=<apikey>
+ 
 2. Start the container with the following command
 
  sudo -E docker-compose up -d
