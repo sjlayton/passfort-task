@@ -4,7 +4,30 @@ services:
     build: ./gateway
     ports:
       - "5000:5000"
+    environment:
+      - DD_AGENT_HOST=datadog
+      - DD_TRACE_AGENT_PORT=8126
   dice-service:
     build: ./dice-service
     ports:
       - "5001"
+    environment:
+      - DD_AGENT_HOST=datadog
+      - DD_TRACE_AGENT_PORT=8126
+  datadog:
+    image: datadog/agent:latest
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/proc/:/host/proc/:ro"
+      - "/sys/fs/cgroup/:/host/sys/fs/cgroup:ro"
+      - "/opt/datadog-agent/run:/opt/datadog-agent/run:rw"
+    environment:
+      - DD_API_KEY
+      - DD_APM_ENABLED=true
+      - DD_LOGS_ENABLED=true
+      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+      - DD_PROCESS_AGENT_ENABLED=true
+      - DD_APM_NON_LOCAL_TRAFFIC=true
+      - DD_AC_EXCLUDE="name:datadog"
+    ports:
+      - "8192"
